@@ -11,12 +11,13 @@ const initialFormValues = {
   first_name: '',
   email: '',
   password: '',
-  termsOfService: false,
+  termsOfService: '',
 }
 const initialFormErrors = {
   first_name: '',
   email: '',
   password: '',
+  termsOfService: '',
 }
 const initialUsers = []
 const initialDisabled = true
@@ -67,7 +68,21 @@ export default function App() {
   return (
     <div className="App">
       <header><h1>User List</h1></header>
+      <UserForm
+        values={formValues}
+        change={inputChange}
+        submit={formSubmit}
+        disabled={disabled}
+        errors={formErrors}
+      />
 
+      {
+        users.map(user => {
+          return (
+            <User key={user.id} details={user} />
+          )
+        })
+      }
     </div>
   );
 }
