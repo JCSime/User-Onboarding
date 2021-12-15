@@ -3,15 +3,18 @@ const formSchema = yup.object().shape({
     first_name: yup
     .string()
     .trim()
-    .required(`Can't let you in without a first name`)
-    .min(3, `Your name isn't shorter than 3 letters, is it?`),
+    .required('Username is required')
+    .min(3, 'Username has to be three characters!'),
+    email: yup
+    .string()
+    .email('Gotta be a valid email')
+    .required('Email required!'),
     password: yup
     .string()
-    .password()
-    .required(`You're not gonna make this easy, huh? Make up a password`),
+    .required('make a password'),
     termsOfService: yup
-    .string()
-    .oneOf(['Yes', 'No'], 'TOS Yes or No? Ya gotta pick'),
+    .boolean()
+    .oneOf([true, false], 'Must accept TOS'),
 })
 
 export default formSchema;

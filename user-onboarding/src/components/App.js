@@ -11,13 +11,12 @@ const initialFormValues = {
   first_name: '',
   email: '',
   password: '',
-  termsOfService: '',
+  termsOfService: false,
 }
 const initialFormErrors = {
   first_name: '',
   email: '',
   password: '',
-  termsOfService: '',
 }
 const initialUsers = []
 const initialDisabled = true
@@ -27,18 +26,19 @@ export default function App() {
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
+  
   const getUsers = () => {
     axios.get('https://reqres.in/api/users')
     .then(resp => {
-      setUsers(resp.data);
+      setUsers(resp.data.data);
     }).catch(err => console.error(err))
   }
   const postNewUser = newUser => {
-    axios.post('https://reqres.in/api/users')
+    axios.post('https://reqres.in/api/users', newUser)
     .then(resp => {
       setUsers([ resp.data, ...users ]);
     }).catch(err => console.error(err))
-    .finally(()=> setFormValues(initialFormValues))
+    .finally(() => setFormValues(initialFormValues))
   }
   const validate = (name, value) => {
     yup.reach(schema, name)
@@ -52,10 +52,10 @@ export default function App() {
   }
   const formSubmit = () => {
     const newUser ={
-      first_name: formValues.name.trim(),
+      first_name: formValues.first_name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      termsOfService: formValues.termsOfService.trim()
+      termsOfService: ['accept'].filter(tos => !!formValues[tos])
     }
     postNewUser(newUser);
   }

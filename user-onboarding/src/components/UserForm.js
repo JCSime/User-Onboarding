@@ -7,14 +7,14 @@ export default function UserForm(props) {
       change,
       disabled,
       errors,
-    } = props;
+    } = props
     const onSubmit = evt => {
         evt.preventDefault()
         submit()
     }
     const onChange = evt => {
         const { name, value, checked, type } = evt.target
-        const valueToUse = type === 'chackbox' ? checked : value;
+        const valueToUse = type === 'checkbox' ? checked : value;
         change(name, valueToUse)
     }
 
@@ -23,7 +23,7 @@ export default function UserForm(props) {
             <div className='form-group submit'>
                 <h2>Add New User</h2>
                 <button disabled={disabled}>submit</button>
-                <div classname='errors'>
+                <div className='errors'>
                     <div>{errors.first_name}</div>
                     <div>{errors.email}</div>
                     <div>{errors.password}</div>
@@ -32,48 +32,39 @@ export default function UserForm(props) {
             </div>
             <div className='form-group inputs'>
                 <h4>General Info</h4>
-                <lable>First Name
+                <label>First Name
                     <input 
                     value={values.first_name}
                     onChange={onChange}
-                    name='first name'
+                    name='first_name'
                     type='text'
                     />
-                </lable>
-                <lable>Email
+                </label>
+                <label>Email
                     <input 
                     value={values.email}
                     onChange={onChange}
                     name='email'
                     type='text'
                     />
-                </lable>
-                <lable>Password
+                </label>
+                <label>Password
                     <input 
                     value={values.password}
                     onChange={onChange}
                     name='password'
                     type='text'
                     />
-                </lable>
-                <lable>Yes
+                </label>
+                <h4>TOS</h4>
+                <label>Accept
                     <input
-                        type='radio'
-                        name='terms of service'
-                        value='yes'
+                        type='checkbox'
+                        name='termsOfService'
+                        checked={values.accept}
                         onChange={onChange}
-                        checked={values.termsOfService === 'yes'}
                     />
-                </lable>
-                <lable>No
-                    <input
-                        type='radio'
-                        name='terms of service'
-                        value='no'
-                        onChange={onChange}
-                        checked={values.termsOfService === 'no'}
-                    />
-                </lable>
+                </label>
             </div>
         </form>
     );
