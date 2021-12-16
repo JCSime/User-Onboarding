@@ -67,7 +67,7 @@ export default function App() {
   }, [formValues])
   return (
     <div className="App">
-      <header><h1>User List</h1></header>
+      <header><h1>~User List~</h1></header>
       <UserForm
         values={formValues}
         change={inputChange}

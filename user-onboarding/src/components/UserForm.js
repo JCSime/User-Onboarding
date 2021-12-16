@@ -56,8 +56,7 @@ export default function UserForm(props) {
                     type='text'
                     />
                 </label>
-                <h4>TOS</h4>
-                <label>Accept
+                <label>Terms of Service
                     <input
                         type='checkbox'
                         name='termsOfService'

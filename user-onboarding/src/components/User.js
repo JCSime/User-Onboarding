@@ -6,20 +6,24 @@ function User({ details }) {
     }
     return (
         <div className='user container'>
-            <img src={details.avatar} alt="No user image available" />
+            <div className='img'>
+                <img src={details.avatar} alt="No user image available" />
+            </div>
             <h2>{details.first_name}</h2>
-            <p>Email: {details.email}</p>
-            <p>Password: ****</p>
-            
-            {
-                !!details.termsOfService && !!details.termsOfService.length &&
-                <div>
-                    TOS:
-                    <ul>
-                        {details.termsOfService.map((like, idx) => <li key={idx}>{like}</li>)}
-                    </ul>
-                </div>
-            }
+            <div className='info'>
+                <p>Email: {details.email}</p>
+                <p>Password: ****</p>
+                
+                {
+                    !!details.termsOfService && !!details.termsOfService.length &&
+                    <div>
+                        TOS:
+                        <ul>
+                            {details.termsOfService.map((like, idx) => <li key={idx}>{like}</li>)}
+                        </ul>
+                    </div>
+                }
+            </div>
         </div>
     )
 }
