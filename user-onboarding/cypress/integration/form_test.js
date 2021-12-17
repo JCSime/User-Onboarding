@@ -26,37 +26,60 @@ describe('User onboarding app', () => {
         tosInputs().should('exist');
         foobarInput().should('not.exist');
     })
+
+    describe('Adding a new user', () => {
+        it('can type in the inputs', () => {
+            nameInputs()
+            .should('have.value', '')
+            .type('testUser')
+            .should('have.value', 'testUser')
     
-    it('can type in the inputs', () => {
-        nameInputs()
-        .should('have.value', '')
-        .type('testUser')
-        .should('have.value', 'testUser')
+            emailInputs()
+            .should('have.value', '')
+            .type('lorem_ipsum@test.com')
+            .should('have.value', 'lorem_ipsum@test.com')
+    
+            passwordInputs()
+            .should('have.value', '')
+            .type('password4321')
+            .should('have.value', 'password4321')
+    
+            cy.contains(/Terms of Service/)
+            .should('not.be.checked')
+            .click()
+            // .should('be.checked')
+        })
+        it('submit button starts out disabled', () => {
+            // submitBtn().should('be.disabled');
+            cy.contains(/submit/).should('exist');
+        })
+    
+        it('the submit button enables when all inputs are filled out', () => {
+            nameInputs().type('testUser2');
+            emailInputs().type('testUser2@test.com');
+            passwordInputs().type('password123');
+            cy.contains(/Terms of Service/).click();
+            cy.contains(/submit/).should('not.be.disabled');
+            cy.contains(/submit/).should('exist');
+        })
 
-        emailInputs()
-        .should('have.value', '')
-        .type('lorem_ipsum@test.com')
-        .should('have.value', 'lorem_ipsum@test.com')
+        it('adding user', () => {
+            nameInputs().type('testUser3');
+            emailInputs().type('testUse32@test.com');
+            passwordInputs().type('strongPassword');
+            cy.contains(/Terms of Service/).click();
+            cy.contains(/submit/).should('not.be.disabled');
+            cy.contains(/submit/).click();
+            cy.contains(/submit/).should('be.disabled');
+        })
 
-        passwordInputs()
-        .should('have.value', '')
-        .type('password4321')
-        .should('have.value', 'password4321')
-
-        // tosInputs()
-        // .should('not.be.visible')
-        // .check(true)
-        // .should('be.checked')
-    })
-    it('submit button starts out disabled', () => {
-        submitBtn().should('be.disabled');
-    })
-
-    it('the submit button enables when all inputs are filled out', () => {
-        nameInputs().type('testUser2');
-        emailInputs().type('testUser2@test.com');
-        passwordInputs().type('password123')
-        submitBtn().should('not.be.disabled');
+        it('checking form validation', () => {
+            nameInputs().type('t');
+            emailInputs().type('t');
+            passwordInputs().type('t');
+            cy.contains(/submit/).should('be.disabled');
+        })
     })
     
+
 })
