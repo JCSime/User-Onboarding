@@ -22,7 +22,7 @@ export default function UserForm(props) {
         <form className='form container' onSubmit={onSubmit}>
             <div className='form-group submit'>
                 <h2>Add New User</h2>
-                <button disabled={disabled}>submit</button>
+                <button className='submitBtn' disabled={disabled}>submit</button>
                 <div className='errors'>
                     <div>{errors.first_name}</div>
                     <div>{errors.email}</div>
